@@ -15,37 +15,71 @@ struct Nodo{
 void inicializar(Nodo*v[],int t);
 Nodo*insertar(int fila ,int columna,int valor, Nodo*v[]);
 void mostrarUnaFila(Nodo*v[] ,int n);
+Nodo*Buscar(Nodo*v[],int t,int valor );
 
 
 
+int main() {
 
-int main(){
+   // Nodo*v[3];
 
-    Nodo*v[3];
-
-    inicializar(v,3);
+   // inicializar(v,3);
     int colum;
     int fila;
     int valor;
-    int i=0;
+  //  int i=0;
+    int cColum;
+    int cFil=0;
+
+
 
     cout<<"Cantidad De Columnas a Cargar"<<endl;
     cin>>cColum;
     cout<<"Cantidad de Filas a Cargar"<<endl,
-    cin>>cFil
+    cin>>cFil;
+
+    Nodo*v[cFil];
+    inicializar(v,cFil);
+
 
     for(int j=0;j<cColum ; j++)
     {
         cout<<"Ingresando Columna :"<<j+1<<endl;
 
-
-        for(int i=0;i<cColum ; i++)
+        for(int i=0;i<cFil ; i++)
         {
-             cout<<"Ingrese fila: "<<i+1<<endl;
-
+            int unValor =0;
+            cout<<"Ingresando fila: "<<i+1<<endl;
+            cout<<"Ingrese un Valor"<<endl;
+            cin>>unValor;
+            // punto 5 implementaria la restricción que un valor tiene que ser mayor a 0
+          //  if(unValor!=0 && unValor>=0)
+                if(unValor!=0 )
+                insertar(i+1,j+1,unValor,v);
         }
 
     }
+
+        mostrarUnaFila(v , 1);
+        cout<<""<<endl;
+        mostrarUnaFila(v , 2);
+        cout<<""<<endl;
+        mostrarUnaFila(v , 3);
+
+        int asignar=0;
+        cout<<"Buscar valor :"<<endl;
+        cin>>asignar;
+        Nodo*c;
+        c=Buscar(v,cFil,asignar);
+        cout<<"Posicion del valor :"<<endl;
+
+        if(c!=NULL)
+            cout<<c->pos<<endl;
+        else
+            cout<<"No se encontro ese valor"<<endl;
+
+
+    /*
         Nodo *p;
         cout<<"Ingrese comlumna"<<endl;
         cin>>colum;
@@ -56,12 +90,12 @@ int main(){
 
         p=insertar(fila,colum,valor,v);
         i++;
-    }
 
-    mostrarUnaFila(v , 1);
 
-    caragrMatriz(Nodo*v[])
+  //  mostrarUnaFila(v , 1);
 
+   // caragarMatriz(Nodo*v[])
+  */
     return 0;
 }
 
@@ -88,7 +122,8 @@ Nodo*insertar(int fila ,int columna,int valor, Nodo*v[]){
         if(b!=fil)
             ant->sgte=p;
         else
-            v[fila-1]=p;
+            return v[fila-1]=p;
+
 
 
 
@@ -110,12 +145,34 @@ void mostrarUnaFila(Nodo*v[] ,int n) {
     Nodo*fila = v[n-1];
     while(fila!=NULL)
     {
-        cout<<fila->pos<< " ";
+        cout<<fila->valor<< " ";
         fila=fila->sgte;
 
     }
 }
 
 
-// 4
+// 3
+
+Nodo*Buscar(Nodo*v[],int t,int unValor )
+{
+
+    Nodo*p=NULL;
+    int i=0;
+    for(i;i<t ;i++)
+    {
+        while( v[i]!=NULL && v[i]->valor !=unValor){
+
+              v[i]=v[i]->sgte;
+        }
+
+        if(v[i]!=NULL)
+            p=v[i];
+
+
+    }
+    return p ;
+}
+
+
 
