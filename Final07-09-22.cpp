@@ -13,7 +13,7 @@ struct Nodo{
 
 
 void inicializar(Nodo*v[],int t);
-Nodo*insertar(int fila ,int columna,int valor, Nodo*v[]);
+void insertar(int columna,int valor, Nodo*&lista);
 void mostrarUnaFila(Nodo*v[] ,int n);
 Nodo*Buscar(Nodo*v[],int t,int valor );
 
@@ -45,38 +45,43 @@ int main() {
     for(int j=0;j<cColum ; j++)
     {
         cout<<"Ingresando Columna :"<<j+1<<endl;
-
+        cout<<""<<endl;
         for(int i=0;i<cFil ; i++)
         {
             int unValor =0;
-            cout<<"Ingresando fila: "<<i+1<<endl;
-            cout<<"Ingrese un Valor"<<endl;
-            cin>>unValor;
-            // punto 5 implementaria la restricción que un valor tiene que ser mayor a 0
-          //  if(unValor!=0 && unValor>=0)
-                if(unValor!=0 )
-                insertar(i+1,j+1,unValor,v);
+            do
+            {
+
+                cout<<"Ingresando fila: "<<i+1<<endl;
+                cout<<"Ingrese un Valor"<<endl;
+                cin>>unValor;
+                // punto 5 implementaria la restricciï¿½n que un valor tiene que ser mayor a 0
+            }while(unValor<=0);
+                insertar(j,unValor, v[i]);
+
+
         }
 
     }
 
-        mostrarUnaFila(v , 1);
-        cout<<""<<endl;
-        mostrarUnaFila(v , 2);
-        cout<<""<<endl;
-        mostrarUnaFila(v , 3);
+    mostrarUnaFila(v , 1);
+    cout<<""<<endl;
+    mostrarUnaFila(v , 2);
+    cout<<""<<endl;
+    //mostrarUnaFila(v , 3);
 
-        int asignar=0;
-        cout<<"Buscar valor :"<<endl;
-        cin>>asignar;
-        Nodo*c;
-        c=Buscar(v,cFil,asignar);
-        cout<<"Posicion del valor :"<<endl;
 
-        if(c!=NULL)
-            cout<<c->pos<<endl;
-        else
-            cout<<"No se encontro ese valor"<<endl;
+    int asignar=0;
+    cout<<"Buscar valor :"<<endl;
+    cin>>asignar;
+    Nodo*c;
+    c=Buscar(v,cFil,asignar);
+    cout<<"Posicion del valor :"<<endl;
+
+    if(c!=NULL)
+        cout<<c->pos<<endl;
+    else
+        cout<<"No se encontro ese valor"<<endl;
 
 
     /*
@@ -102,13 +107,12 @@ int main() {
 // 2 Declare y defina la funcion Nodo*Insertar(int FIla ,int Columna,int Valor, Nodo*v[])
 // la cual inserte un Nodo en la matriz esparcida;
 
-Nodo*insertar(int fila ,int columna,int valor, Nodo*v[]){
+void insertar(int columna,int valor, Nodo *&lista){
 
 
-        Nodo*b,*ant,*p,*fil=v[fila-1];
-        b=fil;
+        Nodo*ant,*p,*b=lista;
         p=new Nodo;
-        p->pos=columna-1;
+        p->pos=columna;
         p->valor=valor;
 
         while(b!=NULL && b->pos < p->pos )
@@ -118,16 +122,11 @@ Nodo*insertar(int fila ,int columna,int valor, Nodo*v[]){
 
         }
 
-        p->sgte =b;
-        if(b!=fil)
+        p->sgte=b;
+        if(b!=lista)
             ant->sgte=p;
         else
-            return v[fila-1]=p;
-
-
-
-
-
+             lista=p;
 
 
 }
