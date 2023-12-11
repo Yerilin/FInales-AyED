@@ -143,8 +143,8 @@ Nodo *buscarNodo(Nodo *listaCircular, char nombreYApellido[])
         if(encontrado)
             return aux;
     }
-    
-    return NULL;
+    else 
+        return NULL;
 }
 
 void ingresarPasajeros(Pasajero nuevo,Nodo*listaCircular){
