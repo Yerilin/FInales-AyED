@@ -138,7 +138,7 @@ void actualizarReservas(Hotel v[],Nodo2*listaOrd){
     while(p!=NULL){
 
         b=buscarPosición(v,p->codHotel);
-        if(b!=-1 && v[b-1].disponible>p->diasReservados){
+        if(b!=-1 && v[b-1].disponible>p->diasReservados){   /*Sin actualizar la lista */
             
             v[b-1].disponible-=p->diasReservados;
             v[b-1].cantReservas+=p->diasReservados;
@@ -149,7 +149,18 @@ void actualizarReservas(Hotel v[],Nodo2*listaOrd){
     }
 }
 
-/*Sin actualizar la lista */
+
+/*Punto Extra : En base a la estrategia que propuso, explique por que cree que es 
+la más eficiente en terminos de recursos ¿considera que hay otra alternativa?¿que beneficiones o
+limitaciones tiene sobre la otra? 
+
+- Considero que usar la posición de cada hotel dependiendo si hay reservas o no , es lo más conveniente 
+por que así solo buscamos los hoteles que unicamente tengan reservas y no todos los hoteles, otra forma 
+de hacerlo seria tambien recoriendo el vector y viendo si tiene reservas que lo hariamos con un for , 
+por que sabemos que como maximo tenemos 50 hoteles ,en el cual tendriamos que usar más memoria tratando
+de recorrer todo el vector y despues buscando si en la lista exite reservas para ese hotel, en ves de solo 
+buscar si tiene reservas y realizar la actualización.
+*/
 
 /*Ejercicio 3 - Archivo y listas  */
 
@@ -218,6 +229,13 @@ void actualizarReservas(Hotel v[],Nodo2*listaOrd){
         return byP;
     }
 
+
+/*Punto Extra : En base a la estrategia proppuesta de resolución ¿considera que podría haber utilizado otra/s
+estrutura/s para resolver los problemas? ¿cualés podrían haber sido y baso que condicones ?
+
+    - Considero que podriamos haber utilizado un vector pero necesitariamos saber su tamaño , y una vez 
+    tengamos el vector ordenar el vector y escribirlo en el mismo archivo
+*/
 
 /*Funciones Auxiliares */
 
