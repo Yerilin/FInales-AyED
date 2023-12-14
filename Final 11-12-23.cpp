@@ -73,6 +73,8 @@ int main(){
     if(BebidasyPesados!=NULL)
         listar(BebidasyPesados);
 
+    return 0;
+
 }
 
 
