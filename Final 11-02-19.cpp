@@ -28,7 +28,8 @@ struct Registro{
 struct Caja {
     int dInicial;
     Venta v;
-    Cola c;
+    Cliente*pri;
+    Cliente*ult;
 };
 struct Cola {
     Cliente*pri;
@@ -92,8 +93,8 @@ void inicializarColas(Caja*cajasSuper[],int f){
 
     for(int i=0; i<f; i++){
         
-        cajasSuper[i]->c.pri=NULL;
-        cajasSuper[i]->c.ult=NULL;
+        cajasSuper[i]->pri=NULL;
+        cajasSuper[i]->ult=NULL;
     }
     
 }
@@ -101,7 +102,7 @@ void atenderCliente(int nCaja,Caja*cajasSuper[] ){
     Cliente *primero;
     Caja *caja;
     caja=cajasSuper[nCaja-1];
-    primero = cajasSuper[nCaja-1]->c.pri;
+    primero = cajasSuper[nCaja-1]->pri;
 
     if (primero!= NULL){
         Venta venta;
@@ -137,18 +138,16 @@ void atenderCliente(int nCaja,Caja*cajasSuper[] ){
 
 void reasignarCaja(int cajaActual,int CajaDestino,Caja*cajasSuper[]){
     Cliente *c1,*c2;
-    Cola *cola,*cola2;
-    cola = &cajasSuper[cajaActual-1]->c;
-    c1= cola->pri;
-    cola->pri= cola->pri->sgte;
+    c1= cajasSuper[cajaActual-1]->pri;
+    cajasSuper[cajaActual-1]->pri=c1->sgte;
     c1->sgte=NULL;
-    cola2=&cajasSuper[CajaDestino-1]->c;
-    cola2->ult = c1; 
-
-  
- 
+    c2=cajasSuper[CajaDestino-1]->ult;
+    c2=c1;
+/*revisar se cambiaron cosas, puede que no ande bien */
 
 }
+  
+ 
 
 
 Venta calcularImportes(int carrito){
